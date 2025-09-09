@@ -8,7 +8,6 @@
 import Foundation
 
 public extension Dictionary where Key == String {
-    
     mutating func first(upTo maxItems: Int) {
         var counter: Int = 0
         for (key, _) in self {
