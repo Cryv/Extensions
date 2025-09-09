@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Dictionary where Key == String {
+public extension Dictionary where Key == String {
     
     mutating func first(upTo maxItems: Int) {
         var counter: Int = 0

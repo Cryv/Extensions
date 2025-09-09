@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
 
     var isEmail: Bool {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Double {
+public extension Double {
     var twoPointString: String {
         return String(format: "%.2f", self)
     }

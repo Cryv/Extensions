@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Error {
+public extension Error {
     var eventParameters: [String: Any] {
         [
             "error_description": localizedDescription

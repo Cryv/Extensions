@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Date {
+public extension Date {
     init(month: String) {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
