@@ -8,7 +8,25 @@
 import SwiftUI
 
 public extension Binding {
+    static func convert(_ intBinding: Binding<Int>) -> Binding<String> {
+        Binding<String>(
+            get: { String(intBinding.wrappedValue) },
+            set: { newValue in
+                if let intValue = Int(newValue) {
+                    intBinding.wrappedValue = intValue
+                }
+            }
+        )
+    }
 
+    /// Converte un `Binding<String>` in un `Binding<Int>`.
+    static func convert(_ stringBinding: Binding<String>) -> Binding<Int> {
+        Binding<Int>(
+            get: { Int(stringBinding.wrappedValue) ?? 0 },
+            set: { stringBinding.wrappedValue = String($0) }
+        )
+    }
+    
     static func convert<TInt: Sendable, TFloat: Sendable>(_ intBinding: Binding<TInt>) -> Binding<TFloat>
     where TInt:   BinaryInteger,
           TFloat: BinaryFloatingPoint{
