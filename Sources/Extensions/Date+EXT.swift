@@ -157,6 +157,23 @@ public extension Date {
         return "\(hour):\(minutes)"
     }
     
+    var longTimeString: String {
+        let calendar = Calendar.current
+
+        let hour = calendar.component(.hour, from: self)
+        var minutes = String(calendar.component(.minute, from: self))
+        var seconds = String(calendar.component(.second, from: self))
+        
+        if minutes.count == 1 {
+            minutes = "0\(minutes)"
+        }
+        
+        if seconds.count == 1 {
+            seconds = "0\(seconds)"
+        }
+        
+        return "\(hour):\(minutes):\(seconds)"
+    }
     
     var startOfDay: Date {
             return Calendar.current.startOfDay(for: self)
