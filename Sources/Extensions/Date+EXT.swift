@@ -164,7 +164,6 @@ public extension Date {
         dateFormatter.locale = Locale(identifier: "it_IT")
         dateFormatter.dateFormat = "EEEE"
         
-        print(dateFormatter.string(from: self))
         return dateFormatter.string(from: self)
     }
     
