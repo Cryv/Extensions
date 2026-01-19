@@ -157,6 +157,17 @@ public extension Date {
         return "\(hour):\(minutes)"
     }
     
+    /// Returns the string of the day of the week (es. lunedì)
+    var dayOfWeekString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.locale = Locale(identifier: "it_IT")
+        dateFormatter.dateFormat = "EEEE"
+        
+        print(dateFormatter.string(from: self))
+        return dateFormatter.string(from: self)
+    }
+    
     var longTimeString: String {
         let calendar = Calendar.current
 
