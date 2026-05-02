@@ -80,7 +80,7 @@ public extension Date {
     var monthString: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        formatter.locale = .current
+        formatter.locale = Locale(identifier: "it_IT")
         formatter.setLocalizedDateFormatFromTemplate("MMMM")
         
         return formatter.string(from: self)
