@@ -89,7 +89,7 @@ public extension Date {
     var yearString: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        formatter.setLocalizedDateFormatFromTemplate("YYYY")
+        formatter.setLocalizedDateFormatFromTemplate("yyyy")
         let formattedDate = formatter.string(from: self)
         
         return formattedDate.firstUppercased
