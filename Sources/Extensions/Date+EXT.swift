@@ -199,8 +199,6 @@ public extension Date {
     var startOfMonth: Date {
         let calendar = Calendar(identifier: .gregorian)
         var components = calendar.dateComponents([.year, .month], from: self)
-        let yearComponent = calendar.dateComponents([.year], from: self)
-        components.year = yearComponent.year
         return calendar.date(from: components)?.startOfDay ?? Date().startOfDay
     }
 
@@ -209,6 +207,28 @@ public extension Date {
         components.month = 1
         components.day = -1
         return Calendar(identifier: .gregorian).date(byAdding: components, to: startOfMonth)?.endOfDay ?? Date()
+    }
+    
+    var startOfYear: Date {
+        let calendar = Calendar(identifier: .gregorian)
+        var components = calendar.dateComponents([.year], from: self)
+        return calendar.date(from: components)?.startOfDay ?? Date().startOfDay
+    }
+
+    var endOfYear: Date {
+        let calendar = Calendar(identifier: .gregorian)
+
+        let startOfNextYear = calendar.date(
+            byAdding: .year,
+            value: 1,
+            to: startOfYear
+        )!
+
+        return calendar.date(
+            byAdding: .day,
+            value: -1,
+            to: startOfNextYear
+        )!.endOfDay
     }
     
     var daysInCurrentMonth: Int? {
