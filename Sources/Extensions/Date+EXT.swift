@@ -137,7 +137,9 @@ public extension Date {
     
     var hourMinuteInt: Int {
         let components = Calendar.current.dateComponents([.hour, .minute], from: self)
-        let string = "\(components.hour ?? 0)\(components.minute ?? 0)"
+        let minute = components.minute ?? 0
+        let minuteString = String(minute).count == 1 ? "\(minute)0" : "\(minute)"
+        let string = "\(components.hour ?? 0)\(minuteString)"
         return Int(string) ?? 0
     }
     
