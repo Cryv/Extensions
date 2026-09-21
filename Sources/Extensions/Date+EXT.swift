@@ -135,6 +135,12 @@ public extension Date {
         return components.hour ?? 0
     }
     
+    var hourMinuteInt: Int {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: self)
+        let string = "\(components.hour ?? 0)\(components.minute ?? 0)"
+        return Int(string) ?? 0
+    }
+    
     var dayInt: Int {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
