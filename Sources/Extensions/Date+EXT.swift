@@ -174,14 +174,17 @@ public extension Date {
     
     /// 17
     var dayInt: Int {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.locale = Locale(identifier: "it_IT")
-        dateFormatter.dateFormat = "dd"
-        
-        return Int(dateFormatter.string(from: self)) ?? 0
+        Calendar.current.component(.day, from: self)
     }
     
+    /// 9
+    var monthInt: Int {
+        Calendar.current.component(.month, from: self)
+    }
+    
+    var yearInt: Int {
+        Calendar.current.component(.year, from: self)
+    }
     
     /// Returns the string of the day of the week (es. lunedì)
     var dayOfWeekString: String {
