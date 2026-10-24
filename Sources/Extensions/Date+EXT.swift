@@ -182,6 +182,7 @@ public extension Date {
         Calendar.current.component(.month, from: self)
     }
     
+    /// 2026
     var yearInt: Int {
         Calendar.current.component(.year, from: self)
     }
