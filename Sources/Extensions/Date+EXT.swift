@@ -57,6 +57,17 @@ public extension Date {
         self = formatter.date(from: timeString) ?? Date()
     }
     
+    /// sabato 17 ottobre
+    var dayString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.locale = Locale(identifier: "it_IT")
+        dateFormatter.dateFormat = "EEEE dd MMMM"
+        
+        return dateFormatter.string(from: self)
+    }
+    
+    /// sabato 17 ottobre 2026
     var extendedStringDescription: String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "IT-it")
@@ -67,6 +78,7 @@ public extension Date {
         return formatter.string(from: self)
     }
     
+    /// 17 ott 2026 - ieri - oggi - domani
     var relativeDate: String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "it_IT")
@@ -77,6 +89,26 @@ public extension Date {
         return formatter.string(from: self)
     }
     
+    /// sabato 17 ottobre - Ieri - Oggi - Domani
+    func formattedRelativeDate() -> String {
+        let calendar = Calendar.current
+        let today = Date()
+        
+        let diff = calendar.dateComponents([.day], from: calendar.startOfDay(for: today), to: calendar.startOfDay(for: self)).day ?? 0
+        
+        switch diff {
+        case -1:
+            return "Ieri"
+        case 0:
+            return "Oggi"
+        case 1:
+            return "Domani"
+        default:
+            return self.formatted(.dateTime.weekday(.wide).day().month(.wide).locale(.init(identifier: "it_IT")))
+        }
+    }
+    
+    /// ottobre
     var monthString: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -86,6 +118,7 @@ public extension Date {
         return formatter.string(from: self)
     }
     
+    /// 2026
     var yearString: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -95,6 +128,7 @@ public extension Date {
         return formattedDate.firstUppercased
     }
     
+    /// 26
     var shortYearString: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -104,6 +138,7 @@ public extension Date {
         return formattedDate.firstUppercased
     }
     
+    /// 17/10/26
     var shortDateString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -111,15 +146,7 @@ public extension Date {
         return dateFormatter.string(from: self)
     }
     
-    var dayString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.locale = Locale(identifier: "it_IT")
-        dateFormatter.dateFormat = "EEEE dd MMMM"
-        
-        return dateFormatter.string(from: self)
-    }
-    
+    /// 17 ottobre
     var shortDayString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -129,12 +156,14 @@ public extension Date {
         return dateFormatter.string(from: self)
     }
     
+    /// 16
     var hourInt: Int {
         let components = Calendar.current.dateComponents([.hour], from: self)
         
         return components.hour ?? 0
     }
     
+    /// 1615
     var hourMinuteInt: Int {
         let components = Calendar.current.dateComponents([.hour, .minute], from: self)
         let minute = components.minute ?? 0
@@ -143,6 +172,7 @@ public extension Date {
         return Int(string) ?? 0
     }
     
+    /// 17
     var dayInt: Int {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -152,6 +182,18 @@ public extension Date {
         return Int(dateFormatter.string(from: self)) ?? 0
     }
     
+    
+    /// Returns the string of the day of the week (es. lunedì)
+    var dayOfWeekString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.locale = Locale(identifier: "it_IT")
+        dateFormatter.dateFormat = "EEEE"
+        
+        return dateFormatter.string(from: self)
+    }
+    
+    /// 16:05
     var timeString: String {
         let calendar = Calendar.current
 
@@ -165,16 +207,7 @@ public extension Date {
         return "\(hour):\(minutes)"
     }
     
-    /// Returns the string of the day of the week (es. lunedì)
-    var dayOfWeekString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.locale = Locale(identifier: "it_IT")
-        dateFormatter.dateFormat = "EEEE"
-        
-        return dateFormatter.string(from: self)
-    }
-    
+    /// 16:05:37
     var longTimeString: String {
         let calendar = Calendar.current
 
@@ -249,6 +282,7 @@ public extension Date {
         return calendar.date(from: components)!
     }
     
+    /// Lunedi = 1, Martedi = 2, etc.
     var weekdayNumberStartingMonday: Int {
         let calendar = Calendar(identifier: .gregorian)
         var weekday = calendar.component(.weekday, from: self)
